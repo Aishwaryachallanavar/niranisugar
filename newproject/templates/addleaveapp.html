@@ -56,13 +56,20 @@ body {
 
       <form action="/addleaveapp" method="post">
           {% csrf_token %}
-          <label for="lemployee_ID" >Name</label>
+          <label for="lemployee_ID">Name</label>
           <input type="text" id="lemployee_ID" name ="lemployee_ID" value="{{lemployee_ID}}"><br>
 
-          <label for="leave_type_id" >Leave Type</label>
-          <input type="text" id="leave_type_id" name ="leave_type_id" value="{{leave_type_id}}"><br>
+          <label >Select Leave Type</label>
+          <select name = "leavetype">
+              {% for leavetype in leavetypes reversed %}
+                <option value="{{leavetype.id}}">{{leavetype.leave_type_name}}</option>
+              {% endfor %}
+          </select>
+          <br>
 
-           <label for="date_of_application" >Date of application</label>
+
+
+          <label for="date_of_application" >Date of application</label>
           <input type="date" id="date_of_application"  name ="date_of_application" value="{{date_of_application}}"><br>
 
           <label for="l_from" >Leave from</label>
@@ -71,17 +78,17 @@ body {
           <label for="l_to " >Leave To</label>
           <input type="date" id="l_to " name ="l_to" value="{{l_to}}"><br>
 
-           <label for="no_of_days" >Number of Days</label>
+           <label>Number of Days</label>
           <input type="number" id="no_of_days " name ="no_of_days" value="{{no_of_days }}"><br>
 
           <label for="reason" >Reason</label>
           <input type="text" id="reason" name ="reason" value="{{reason}}"><br>
 
-            <label for="approval_status" >Number of Days</label>
-          <input type="text" id="approval_status" name ="approval_status" value="{{approval_status }}"><br>
-
-
           <button type="submit">Apply</button>
+          {% if msg %}
+          <h1>{{msg}}</h1>
+          {% endif %}
+
       </form>
   </div>
 </div>

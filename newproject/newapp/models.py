@@ -68,9 +68,9 @@ class leave_application(models.Model):
     l_to = models.DateField()
     no_of_days = models.IntegerField()
     reason = models.CharField(max_length=200)
-    approval_status = models.CharField(max_length=200)
+    approval_status = models.CharField(max_length=200, blank=True)
     def __str__(self):
-        return self.approval_status
+        return self.reason
 
 class account(models.Model):
     acc_employee_id = models.ForeignKey(employee, on_delete=models.CASCADE)
