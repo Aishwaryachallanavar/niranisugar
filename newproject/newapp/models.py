@@ -56,6 +56,7 @@ class employee_shift(models.Model):
 
 class leavetype(models.Model):
     leave_type_name = models.CharField(max_length=200)
+    approval_status = models.BooleanField(default=False)
     no_of_days_allowed = models.IntegerField()
     def __str__(self):
         return self.leave_type_name

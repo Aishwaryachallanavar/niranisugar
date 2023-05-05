@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import leave_application, leavetype, employee, shift, employee_shift
-
+from django.http import HttpResponse
 
 
 def main(request):
@@ -116,3 +116,17 @@ def addempshift(request):
         return render(request, 'addempshift.html', {'employees': employee.objects.all(),'shifts': shift.objects.all()})
 
 
+
+def update_true_model(request, model_id):
+    mymodel = leave_application.objects.get(id=model_id)
+    mymodel.approval_status=True
+    mymodel.save()
+    print(mymodel.approval_status)
+    return render(request,'main.html')
+
+def update_false_model(request, model_id):
+    mymodel = leave_application.objects.get(id=model_id)
+    mymodel.approval_status=False
+    mymodel.save()
+    print(mymodel.approval_status)
+    return render(request,'main.html')
